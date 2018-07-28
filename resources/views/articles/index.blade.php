@@ -54,27 +54,37 @@
     <div class="row">
         <div class="col-md-2">
             <div class="sidenav">
-                @foreach ($topics as $t)
-                    @if($t->id==$article->id)
-                        <a href="{{ route('articles_index',['subject_id'=>encrypt($t->sid),'article_id'=>encrypt($t->id)]) }}" class="active">{{ $t->topic }}</a>
-                    @else
-                        <a href="{{ route('articles_index',['subject_id'=>encrypt($t->sid),'article_id'=>encrypt($t->id)]) }}">{{ $t->topic }}</a>
-                    @endif
-                @endforeach
+                @if(isset($article->id))
+                    @foreach ($topics as $t)
+                        @if($t->id==$article->id)
+                            <a href="{{ route('articles_index',['subject_id'=>encrypt($t->sid),'article_id'=>encrypt($t->id)]) }}" class="active">{{ $t->topic }}</a>
+                        @else
+                            <a href="{{ route('articles_index',['subject_id'=>encrypt($t->sid),'article_id'=>encrypt($t->id)]) }}">{{ $t->topic }}</a>
+                        @endif
+                    @endforeach
+                @else
+                    <a>Opps, No Topics Found</a>
+                    <br>
+                @endif
             </div>
         </div>
         <div class="col-md-10">
             <div class="row">
                 <div class="col-md-12">
-                    <div>
-                        <h3>{{ $article->topic }}</h3>
-                        @if(isset($article))
-                            {!! $article->content !!}
-                        @endif
+                    @if(isset($article))
                         <div>
-                            <hr>
+                            <h3>{{ $article->topic }}</h3>
+                            @if(isset($article))
+                                {!! $article->content !!}
+                            @endif
+                            <div>
+                                <hr>
+                            </div>
                         </div>
-                    </div>
+                    @else
+                        Opps, No Topic Found
+                        <br>
+                    @endif
                 </div>
             </div>
         </div>

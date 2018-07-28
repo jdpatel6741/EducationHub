@@ -54,7 +54,7 @@
       <ul class="nav navbar-nav navbar-right mytube">
         @auth
           <li>
-            <a href='{{ $furl }}/ebooks/admin/postebook' id='mytube'>{{ Auth::user()->name }}</a>
+            <a href='' id='mytube'>{{ Auth::user()->name }}</a>
           </li>
         @endauth
           @guest

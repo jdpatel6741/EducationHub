@@ -14,11 +14,12 @@ class articlesMaster extends Controller
         $subjects = Subjects::get();
         if ($article_id!=null and $subject_id!=null) {
             $article = Topics::where(['id'=>decrypt($article_id),'sid'=>decrypt($subject_id)])->first();
+            $topics = Topics::where('sid',decrypt($subject_id))->get();
         }
-    else {
-        $article = Topics::where('id',1)->first();
-    }
-        $topics = Topics::get();
+        else {
+            $article = Topics::where('id',1)->first();
+            $topics = Topics::where('sid',1)->get();
+        }
         return view('articles.index',compact('subjects','topics','article'));
     }
 
