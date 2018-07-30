@@ -12,15 +12,19 @@ class articlesMaster extends Controller
 {
     public function index($subject_id=null,$article_id=null) {
         $subjects = Subjects::get();
-        if ($article_id!=null and $subject_id!=null) {
+        if (isset($article_id) and decrypt($article_id)==1 and $subject_id!=null) {
+            $article = Topics::where(['sid'=>decrypt($subject_id)])->first();
+            $topics = Topics::where('sid',decrypt($subject_id))->get();
+        }
+        else if ($article_id!=null and $subject_id!=null) {
             $article = Topics::where(['id'=>decrypt($article_id),'sid'=>decrypt($subject_id)])->first();
             $topics = Topics::where('sid',decrypt($subject_id))->get();
         }
         else {
-            $article = Topics::where('id',1)->first();
-            $topics = Topics::where('sid',1)->get();
+            $article = Topics::first();
+            $topics = Topics::get();
         }
-        return view('articles.index',compact('subjects','topics','article'));
+        return view('articles.index',compact('subjects','topics','article','subject_id'));
     }
 
     public function viewFirstArticle(Request $r)

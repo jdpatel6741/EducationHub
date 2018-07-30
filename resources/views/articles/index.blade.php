@@ -39,9 +39,13 @@
         <div class="collapse navbar-collapse" id="navbar-collapse2">
             <ul class="nav navbar-nav navbar-left">
                 <li>
-                    <li><a href="{{ route('articles') }}">All</a></li>
+                    <li class="{{ isset($subject_id)==null?'active':'' }}"><a href="{{ route('articles') }}">All</a></li>
                     @foreach($subjects as $s)
-                        <li><a href="{{ route('articles_index',['subject_id'=>encrypt($s->id),'article_id'=>encrypt(1)]) }}">{{ $s->name }}</a></li>
+                        @if(isset($subject_id) and decrypt($subject_id)==$s->id)
+                            <li class="active"><a href="{{route('articles_index',['subject_id'=>encrypt($s->id),'article_id'=>encrypt(1)]) }}">{{ $s->name }}</a></li>
+                        @else
+                            <li><a href="{{route('articles_index',['subject_id'=>encrypt($s->id),'article_id'=>encrypt(1)]) }}">{{ $s->name }}</a></li>
+                        @endif
                     @endforeach
                 </li>
             </ul>
@@ -75,7 +79,7 @@
                         <div>
                             <h3>{{ $article->topic }}</h3>
                             @if(isset($article))
-                                {!! $article->content !!}
+                                {!! htmlentities($article->content) !!}
                             @endif
                             <div>
                                 <hr>

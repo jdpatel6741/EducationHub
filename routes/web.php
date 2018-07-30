@@ -36,31 +36,31 @@ Route::group(['prefix'=>'mytube'],function()
 	Route::get('video/{vid}',["uses" => 'mytube\mytubeMaster@getvideo',"as" => 'video']);
 	Route::get('video/convert/{id}', 'mytube\mytubeMaster@covertvideo');
 	
-	Route::group(['prefix'=>'admin'],function()
+	Route::group(['prefix'=>'admin','middleware'=>'auth'],function()
 	{
-		Route::get('dashboard', 'mytube\admin\mytubeAdminMaster@dashboard')->middleware('auth');
-		Route::get('postvideo', 'mytube\admin\mytubeAdminMaster@postvideo')->middleware('auth');
-		Route::post('postvideo/post', 'mytube\admin\mytubeAdminMaster@post')->middleware('auth');
-		Route::get('videomanager', 'mytube\admin\mytubeAdminMaster@videomanager')->middleware('auth');
-		Route::get('videomanager/edit/{vid}', 'mytube\admin\mytubeAdminMaster@editvideo')->middleware('auth');
-		Route::get('videomanager/delete/{vid}', 'mytube\admin\mytubeAdminMaster@deletevideo')->middleware('auth');
-		Route::post('videomanger/updatevideo/{vid}', 'mytube\admin\mytubeAdminMaster@updatevideo')->middleware('auth');
-		Route::get('channel', 'mytube\admin\mytubeAdminMaster@channel')->middleware('auth');
-		Route::get('channel/add/{name}', 'mytube\admin\mytubeAdminMaster@addchannel')->middleware('auth');
-		Route::get('channel/delete/{id}', 'mytube\admin\mytubeAdminMaster@deletechannel')->middleware('auth');
-		Route::get('channel/deactive/{id}', 'mytube\admin\mytubeAdminMaster@deactivechannel')->middleware('auth');
-		Route::get('channel/active/{id}', 'mytube\admin\mytubeAdminMaster@activechannel')->middleware('auth');
-		Route::get('channel/edit/{id}/{name}', 'mytube\admin\mytubeAdminMaster@editchannel')->middleware('auth');
-		Route::get('favorite', 'mytube\admin\mytubeAdminMaster@favorite')->middleware('auth');
-		Route::get('favorite/remove/{vid}', 'mytube\admin\mytubeAdminMaster@removefavorite')->middleware('auth');
-		Route::get('favorite/add/{vid}', 'mytube\admin\mytubeAdminMaster@addfavorite')->middleware('auth');
-		Route::get('subscription', 'mytube\admin\mytubeAdminMaster@subscription')->middleware('auth');
-		Route::get('subscription/subscribe/{id}/{url}', 'mytube\admin\mytubeAdminMaster@subscribe')->middleware('auth');
-		Route::get('subscription/unsubscribe/{id}', 'mytube\admin\mytubeAdminMaster@unsubscribe')->middleware('auth');
-		Route::get('video/like/{id}', 'mytube\admin\mytubeAdminMaster@like')->middleware('auth');
-		Route::get('mytube/video/unlike/{id}', 'mytube\admin\mytubeAdminMaster@unlike')->middleware('auth');
-		Route::get('video/removelikeunlike/{id}', 'mytube\admin\mytubeAdminMaster@removelikeunlike')->middleware('auth');
-		Route::post('video/postcomment', 'mytube\admin\mytubeAdminMaster@postcomment')->middleware('auth');
+		Route::get('dashboard', 'mytube\admin\mytubeAdminMaster@dashboard');
+		Route::get('postvideo', 'mytube\admin\mytubeAdminMaster@postvideo');
+		Route::post('postvideo/post', 'mytube\admin\mytubeAdminMaster@post');
+		Route::get('videomanager', 'mytube\admin\mytubeAdminMaster@videomanager');
+		Route::get('videomanager/edit/{vid}', 'mytube\admin\mytubeAdminMaster@editvideo');
+		Route::get('videomanager/delete/{vid}', 'mytube\admin\mytubeAdminMaster@deletevideo');
+		Route::post('videomanger/updatevideo/{vid}', 'mytube\admin\mytubeAdminMaster@updatevideo');
+		Route::get('channel', 'mytube\admin\mytubeAdminMaster@channel');
+		Route::get('channel/add/{name}', 'mytube\admin\mytubeAdminMaster@addchannel');
+		Route::get('channel/delete/{id}', 'mytube\admin\mytubeAdminMaster@deletechannel');
+		Route::get('channel/deactive/{id}', 'mytube\admin\mytubeAdminMaster@deactivechannel');
+		Route::get('channel/active/{id}', 'mytube\admin\mytubeAdminMaster@activechannel');
+		Route::get('channel/edit/{id}/{name}', 'mytube\admin\mytubeAdminMaster@editchannel');
+		Route::get('favorite', 'mytube\admin\mytubeAdminMaster@favorite');
+		Route::get('favorite/remove/{vid}', 'mytube\admin\mytubeAdminMaster@removefavorite');
+		Route::get('favorite/add/{vid}', 'mytube\admin\mytubeAdminMaster@addfavorite');
+		Route::get('subscription', 'mytube\admin\mytubeAdminMaster@subscription');
+		Route::get('subscription/subscribe/{id}/{url}', 'mytube\admin\mytubeAdminMaster@subscribe');
+		Route::get('subscription/unsubscribe/{id}', 'mytube\admin\mytubeAdminMaster@unsubscribe');
+		Route::get('video/like/{id}', 'mytube\admin\mytubeAdminMaster@like');
+		Route::get('mytube/video/unlike/{id}', 'mytube\admin\mytubeAdminMaster@unlike');
+		Route::get('video/removelikeunlike/{id}', 'mytube\admin\mytubeAdminMaster@removelikeunlike');
+		Route::post('video/postcomment', 'mytube\admin\mytubeAdminMaster@postcomment');
 	});
 });
 
@@ -85,38 +85,38 @@ Route::group(['prefix'=>'sourcecode'],function()
 // routes of ebook
 Route::group(['prefix'=>'ebooks'],function()
 {
-	Route::get('ebooks', ["uses"=>'ebooks\ebooksMaster@index',"as"=> 'ebooks_index']);
-	Route::get('ebooks/{category_id}', ["uses"=>'ebooks\ebooksMaster@index',"as"=> 'ebooks_index_cat']);
-	Route::get('ebooks/author/{au_id}', ["uses"=>'ebooks\ebooksMaster@author',"as"=> 'ebooks_author']);
-	Route::get('ebooks/show/{bid}', ["uses"=>'ebooks\ebooksMaster@showPDF',"as"=> 'book_show']);
-	Route::get('ebooks/thumbnail/{bid}',["uses" => 'ebooks\ebooksMaster@thumbnail',"as" => 'book_thumb']);
+	Route::get('', ["uses"=>'ebooks\ebooksMaster@index',"as"=> 'ebooks_index']);
+	Route::get('/{category_id}', ["uses"=>'ebooks\ebooksMaster@index',"as"=> 'ebooks_index_cat']);
+	Route::get('/author/{au_id}', ["uses"=>'ebooks\ebooksMaster@author',"as"=> 'ebooks_author']);
+	Route::get('/show/{bid}', ["uses"=>'ebooks\ebooksMaster@showPDF',"as"=> 'book_show']);
+	Route::get('/thumbnail/{bid}',["uses" => 'ebooks\ebooksMaster@thumbnail',"as" => 'book_thumb']);
 
-	Route::group(['prefix'=>'admin'],function() {
-		Route::get('favorite', 'ebooks\admin\ebooksAdminMaster@favorite')->middleware('auth');
-		Route::get('postebook', 'ebooks\admin\ebooksAdminMaster@postebook')->middleware('auth');
-		Route::get('subscription', ["uses"=>'ebooks\admin\ebooksAdminMaster@subscription',"as"=>'ebooks_subscription'])->middleware('auth');
-		Route::get('subscription/subscribe/{uid}/{url}', ["uses"=>'ebooks\admin\ebooksAdminMaster@subscribe',"as"=>'ebooks_author_subscribe'])->middleware('auth');
-		Route::get('subscription/unsubscribe/{id}', ["uses"=>'ebooks\admin\ebooksAdminMaster@unsubscribe',"as"=>'ebooks_author_unsubscribe'])->middleware('auth');
-		Route::post('postebook/post', ["uses"=>'ebooks\admin\ebooksAdminMaster@post',"as"=>'ebooks_post_book'])->middleware('auth');
-		Route::get('favorite/add/{bid}', ["uses"=>'ebooks\admin\ebooksAdminMaster@addfavorite',"as"=>'ebooks_favorite_book'])->middleware('auth');
-		Route::get('favorite/remove/{bid}', ["uses"=>'ebooks\admin\ebooksAdminMaster@removefavorite',"as"=>'ebooks_remove_favorite_book'])->middleware('auth');
-		Route::get('booksmanage',["uses"=>'ebooks\admin\ebooksAdminMaster@booksmanage',"as"=>'ebooks_books_manage'])->middleware('auth');
-		Route::get('bookmanager/edit/{bid}', ["uses"=>'ebooks\admin\ebooksAdminMaster@editbook',"as"=>'ebooks_books_edit'])->middleware('auth');
-		Route::get('bookmanager/delete/{bid}', ["uses"=>'ebooks\admin\ebooksAdminMaster@deletebook',"as"=>'ebooks_books_deletebook'])->middleware('auth');
-		Route::post('bookmanger/updatebook/{bid}', ["uses"=>'ebooks\admin\ebooksAdminMaster@updatebook',"as"=>'ebooks_books_updatebook'])->middleware('auth');
+	Route::group(['prefix'=>'admin','middleware'=>'auth'],function() {
+		Route::get('favorite', 'ebooks\admin\ebooksAdminMaster@favorite');
+		Route::get('postebook', 'ebooks\admin\ebooksAdminMaster@postebook');
+		Route::get('subscription', ["uses"=>'ebooks\admin\ebooksAdminMaster@subscription',"as"=>'ebooks_subscription']);
+		Route::get('subscription/subscribe/{uid}/{url}', ["uses"=>'ebooks\admin\ebooksAdminMaster@subscribe',"as"=>'ebooks_author_subscribe']);
+		Route::get('subscription/unsubscribe/{id}', ["uses"=>'ebooks\admin\ebooksAdminMaster@unsubscribe',"as"=>'ebooks_author_unsubscribe']);
+		Route::post('postebook/post', ["uses"=>'ebooks\admin\ebooksAdminMaster@post',"as"=>'ebooks_post_book']);
+		Route::get('favorite/add/{bid}', ["uses"=>'ebooks\admin\ebooksAdminMaster@addfavorite',"as"=>'ebooks_favorite_book']);
+		Route::get('favorite/remove/{bid}', ["uses"=>'ebooks\admin\ebooksAdminMaster@removefavorite',"as"=>'ebooks_remove_favorite_book']);
+		Route::get('booksmanage',["uses"=>'ebooks\admin\ebooksAdminMaster@booksmanage',"as"=>'ebooks_books_manage']);
+		Route::get('bookmanager/edit/{bid}', ["uses"=>'ebooks\admin\ebooksAdminMaster@editbook',"as"=>'ebooks_books_edit']);
+		Route::get('bookmanager/delete/{bid}', ["uses"=>'ebooks\admin\ebooksAdminMaster@deletebook',"as"=>'ebooks_books_deletebook']);
+		Route::post('bookmanger/updatebook/{bid}', ["uses"=>'ebooks\admin\ebooksAdminMaster@updatebook',"as"=>'ebooks_books_updatebook']);
 	});
 });
 
 // routes of articals
 Route::group(['prefix'=>'articles'],function()
 {
-	Route::get('/', ["uses"=>'articles\articlesMaster@index',"as"=> 'articles']);
-	Route::get('/{subject_id}/{article_id}', ["uses"=>'articles\articlesMaster@index',"as"=> 'articles_index']);
+	Route::get('show', ["uses"=>'articles\articlesMaster@index',"as"=> 'articles']);
+	Route::get('show/{subject_id}/{article_id}', ["uses"=>'articles\articlesMaster@index',"as"=> 'articles_index']);
 
-	Route::group(['prefix'=>'admin'],function()
+	Route::group(['prefix'=>'admin','middleware' => 'auth'],function()
 	{
-		Route::get('add', function () {return view('articles.addarticle');});
-		Route::post('addArticle','articles\admin\articlesAdminMaster@addArticle');
+		Route::get('add', ['uses'=>'articles\admin\articlesAdminMaster@add','as'=>'articles_add']);
+		Route::post('addArticle', ['uses'=>'articles\admin\articlesAdminMaster@addArticle','as'=>'articles_add_article']);
 	});
 });
 

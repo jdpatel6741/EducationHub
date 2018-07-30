@@ -9,6 +9,12 @@ use App\Models\Articals\Subjects;
 
 class articlesAdminMaster extends Controller
 {
+	public function add()
+	{
+		$subjects = Subjects::get();
+		return view('articles.admin.addarticle',compact('subjects'));
+	}
+
     public function addArticle(Request $r)
     {
         $topic = new Topics;
@@ -16,6 +22,6 @@ class articlesAdminMaster extends Controller
         $topic->sid = $r->sid;
         $topic->content = $r->contents;
         $topic->save();
-        return "Success ".$r->topic;
+        return redirect(route('articles_add'));
     }
 }

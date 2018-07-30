@@ -37,8 +37,8 @@
     <!--Top Menubar End-->
     <div class="row">
         <div class="col-md-12">
-            <form method="POST" action="addArticle">
-                <input type="hidden" name="_token" value="{{ csrf_token() }}">
+            <form method="POST" action="{{ route('articles_add_article') }}">
+                @csrf
                 <h2>Post Article  <button type="submit" class="btn btn-success pull-right">Publish</button></h2>
                 <div class="form-group">
                     <label for="topic">Topic:</label>
@@ -47,11 +47,9 @@
                 <div class="form-group">
                     <label for="subject">Subject:</label>
                     <select name="sid" class="form-control" id="subject">
-                        <option value="1">HTML</option>
-                        <option value="2">CSS</option>
-                        <option value="3">JavaScript</option>
-                        <option value="4">PHP</option>
-                        <option value="5">Android</option>
+                        @foreach($subjects as $subject)
+                            <option value="{{ $subject->id }}">{{ $subject->name }}</option>
+                        @endforeach
                     </select>
                 </div>
                 <div class="form-group">

@@ -54,12 +54,12 @@
       <ul class="nav navbar-nav navbar-right mytube">
         @auth
           <li>
-            <a href='' id='mytube'>{{ Auth::user()->name }}</a>
+            <a href='{{ route("articles_add") }}' id='mytube'>{{ Auth::user()->name }}</a>
           </li>
         @endauth
           @guest
           <li>
-            <a href="{{ $furl }}/login"><i class="glyphicon glyphicon-user"></i></a>
+            <a href="{{ route('login') }}"><i class="glyphicon glyphicon-user"></i></a>
           </li>
           @endguest
           @auth
