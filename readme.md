@@ -1,1 +1,3 @@
 # EducationHub
+
+Contributors - PG
