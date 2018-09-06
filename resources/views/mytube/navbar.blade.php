@@ -25,23 +25,21 @@
 <nav class="navbar navbar-fixed-top header">
   <div class="col-md-12">
     <div class="navbar-header">
-      <a href="{{ $furl }}" class="navbar-brand"><i class="glyphicon glyphicon-home"></i></a>
-      <a href="{{ $url }}" class="navbar-brand">MyTube</a>
+      <a href="{{ route('home') }}" class="navbar-brand"><i class="glyphicon glyphicon-home"></i></a>
+      <a href="{{ route('mytube_index') }}" class="navbar-brand">MyTube</a>
       <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-collapse1">
         <i class="glyphicon glyphicon-circle-arrow-right"></i>
       </button>
     </div>
     <div class="collapse navbar-collapse" id="navbar-collapse1">
-      <form class="navbar-form pull-left" action="{{ $url }}" method="GET">
-        <div class="input-group" style="max-width:470px;">
+      <form class="navbar-form pull-left" action="{{ route(Route::currentrouteName()) }}" method="GET">
           <input type="text" class="form-control" placeholder="Search" name="search" id="srch-term">
-        </div>
       </form>
       <ul class="nav navbar-nav navbar-right mytube">
-        <li><a href="{{ $furl }}/converter"><strong>Mp4 to Mp3 Convert</strong></a></li>
+        <li><a href="{{ route('converter') }}"><strong>Mp4 to Mp3 Convert</strong></a></li>
         @auth
           <li>
-            <a href='{{ $url }}/admin/dashboard' id='mytube'>{{ Auth::user()->name }}</a>
+            <a href='{{ route("mytube_dashboard") }}' id='mytube'>{{ Auth::user()->name }}</a>
           </li>
         @endauth
           <li>
@@ -56,7 +54,7 @@
           </li>
           @guest
           <li>
-            <a href="{{ $furl }}/login"><i class="glyphicon glyphicon-user"></i></a>
+            <a href="{{ route('login') }}"><i class="glyphicon glyphicon-user"></i></a>
           </li>
           @endguest
           @auth

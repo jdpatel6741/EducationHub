@@ -2,14 +2,14 @@
 
 namespace App\Http\Controllers\ebooks\admin;
 
-use App\Models\Ebooks\Viewscount;
-use App\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\User;
 use App\Models\Ebooks\Books;
 use App\Models\Ebooks\Category;
 use App\Models\Ebooks\Subscribe;
 use App\Models\Ebooks\Favorite;
+use App\Models\Ebooks\Viewscount;
 use View;
 use DB;
 use Auth;

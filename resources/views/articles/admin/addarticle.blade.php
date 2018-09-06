@@ -1,40 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <title>W3ATMIYA TUTORIAL</title>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="{{ asset('css/bootstrap.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/articals/style.css') }}">
-    <script src="{{ asset('js/jquery-3.2.1.min.js') }}"></script>
-    <script src="{{ asset('js/bootstrap.min.js') }}"></script>
-    <link href="{{ asset('summernote/summernote.css') }}" rel="stylesheet">
-    <script src="{{ asset('summernote/summernote.js') }}"></script>
-</head>
 <body>
-<div class="container">
-    <div class="row">
-        <div class="col-md-6">
-            <img src="images/logo.png" style="height: 60px;" />
-        </div>
-        <div class="col-md-6">
-
-        </div>
-    </div>
-
-    <!--Top Menubar Start-->
-    <nav class="navbar navbar-default bg-darkgrey">
-        <div class="container-fluid">
-            <div class="navbar-header">
-                <a class="navbar-brand" href="#"><span class="glyphicon glyphicon-home text-white"></span></a>
-            </div>
-            <ul class="nav navbar-nav">
-                <li class="active"><a href="#">New Article</a></li>
-                <li><a href="#" class="text-white">View Article</a></li>
-            </ul>
-        </div>
-    </nav>
-    <!--Top Menubar End-->
+@include('articles.navbar')
+@include('articles.admin.menu')
+<div class="container" id="main">
     <div class="row">
         <div class="col-md-12">
             <form method="POST" action="{{ route('articles_add_article') }}">
@@ -54,22 +23,11 @@
                 </div>
                 <div class="form-group">
                     <label for="topic">Content:</label>
-                    <textarea id="summernote" name="contents"></textarea>
+                    <textarea class="form-control resize" name="contents" style="height: 400px;"></textarea>
                 </div>
             </form>
         </div>
     </div>
 </div>
-
-
-<script>
-    $(document).ready(function() {
-        $('#summernote').summernote({
-            placeholder: 'Write Your Content Here',
-            tabsize: 2,
-            height: 600
-        });
-    });
-</script>
 </body>
 </html>

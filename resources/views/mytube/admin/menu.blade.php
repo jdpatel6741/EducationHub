@@ -21,16 +21,16 @@
           <a href="{{ $url }}/postvideo"><span class="glyphicon glyphicon-play"></span> Video Post</a>
         </li>
         <li>
-          <a href="{{ $url }}/videomanager"><span class="glyphicon glyphicon-film"></span> Video Manager</a>
+          <a href="{{ $url }}/videomanager"><span class="glyphicon glyphicon-film"></span> Videos Manager</a>
         </li>
         <li>
-          <a href="{{ $url }}/channel"><span class="glyphicon glyphicon-globe"></span> Channel</a>
+          <a href="{{ $url }}/channel"><span class="glyphicon glyphicon-globe"></span> Channels</a>
         </li>
         <li>
-          <a href="{{ $url }}/favorite"><span class="glyphicon glyphicon-ok"></span> Favorite</a>
+          <a href="{{ $url }}/favorite"><span class="glyphicon glyphicon-ok"></span> Favorites</a>
         </li>
         <li>
-          <a href="{{ $url }}/subscription"><span class="glyphicon glyphicon-play-circle"></span> Subscription</a>
+          <a href="{{ $url }}/subscription"><span class="glyphicon glyphicon-play-circle"></span> Subscriptions</a>
         </li>
       </ul>
     </div>

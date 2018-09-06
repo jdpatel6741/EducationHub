@@ -154,3 +154,8 @@ p#desc
     background-color: #959690 !important;
     color: white !important;
 }
+
+.resize {
+	resize: vertical;
+    overflow: auto;
+}

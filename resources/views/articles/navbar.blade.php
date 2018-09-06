@@ -2,13 +2,17 @@
     <meta http-equiv="content-type" content="text/html; charset=UTF-8">
     <meta charset="utf-8">
     <title>Articals</title>
+    <meta charset="utf-8">
     <meta name="generator" content="Articals">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="viewport" content="width=device-width">
     <link rel="stylesheet" href="{{ asset('css/styles.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/articles/style.css') }}">
     <link rel="stylesheet" href="{{ asset('icon/css/font-awesome.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/bootstrap.min.css') }}">
+    <!-- <link href="{{ asset('css/summernote/summernote.css') }}" rel="stylesheet"> -->
     <script src="{{ asset('js/jquery-3.2.1.min.js') }}"></script>
     <script src="{{ asset('js/bootstrap.min.js') }}"></script>
+    <!-- <script src="{{ asset('css/summernote/summernote.js') }}"></script> -->
 </head>
 <style>
   body {
@@ -39,18 +43,20 @@
 <nav class="navbar navbar-fixed-top header">
   <div class="col-md-12">
     <div class="navbar-header">
-      <a href="{{ $furl }}" class="navbar-brand"><i class="glyphicon glyphicon-home"></i></a>
+      <a href="{{ route('home') }}" class="navbar-brand"><i class="glyphicon glyphicon-home"></i></a>
       <a href="{{ route('articles') }}" class="navbar-brand">Articals</a>
       <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-collapse1">
         <i class="glyphicon glyphicon-circle-arrow-right"></i>
       </button>
     </div>
     <div class="collapse navbar-collapse" id="navbar-collapse1">
-      <form class="navbar-form pull-left" action="{{ $url }}" method="GET">
-        <div class="input-group" style="max-width:470px;">
-          <input type="text" class="form-control" placeholder="Search" name="search" id="srch-term">
-        </div>
-      </form>
+      {{-- @if(Route::current()->action['prefix'] != "articles/admin")
+        <form class="navbar-form pull-left" action="{{ route(Route::currentRouteName()) }}" method="GET">
+          <div class="input-group" style="max-width:470px;">
+            <input type="text" class="form-control" placeholder="Search" name="search" id="srch-term">
+          </div>
+        </form>
+      @endif --}}
       <ul class="nav navbar-nav navbar-right mytube">
         @auth
           <li>

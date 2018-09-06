@@ -5,15 +5,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Articles</title>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="{{ asset('css/bootstrap.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/style.css') }}">
     <link rel="stylesheet" href="{{ asset('css/sidebar.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/articals/style.css') }}">
-    <script src="{{ asset('js/jquery-3.2.1.min.js') }}"></script>
-    <script src="{{ asset('js/bootstrap.min.js') }}"></script>
     <style>
         html, body {
             max-width: 100%;
@@ -27,7 +19,7 @@
 
 <!--Top Menubar Start-->
 <div class="navbar-default" id="subnav">
-    <div class="col-md-12">
+    <div class="col-sm-12">
         <div class="navbar-header">
             <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-collapse2">
                 <span class="sr-only">Toggle navigation</span>
@@ -56,9 +48,9 @@
 
 <div class="container-fluid" style="margin-top: 100px;padding-top: 15px;">
     <div class="row">
-        <div class="col-md-2">
+        <div class="col-sm-2">
             <div class="sidenav">
-                @if(isset($article->id))
+                @if(isset($article))
                     @foreach ($topics as $t)
                         @if($t->id==$article->id)
                             <a href="{{ route('articles_index',['subject_id'=>encrypt($t->sid),'article_id'=>encrypt($t->id)]) }}" class="active">{{ $t->topic }}</a>
@@ -72,12 +64,23 @@
                 @endif
             </div>
         </div>
-        <div class="col-md-10">
+        <div class="col-sm-10">
             <div class="row">
-                <div class="col-md-12">
+                <div class="col-sm-12">
                     @if(isset($article))
                         <div>
-                            <h3>{{ $article->topic }}</h3>
+                            <h3>{{ $article->topic }}
+                                @auth
+                                    @if(isset($article->favorite->id))
+                                        <a href="{{ route('articles_article_removefavorite',encrypt($article->id)) }}?url={{ encrypt(route(Route::currentRouteName(),['subject_id'=>encrypt($t->sid),'article_id'=>encrypt($t->id)])) }}"><i class="glyphicon glyphicon-star" style="color: #ffa200;"></i></a>
+                                    @else
+                                        <a href="{{ route('articles_article_addfavorite',encrypt($article->id)) }}?url={{ encrypt(route(Route::currentRouteName(),['subject_id'=>encrypt($t->sid),'article_id'=>encrypt($t->id)])) }}"><i class="glyphicon glyphicon-star"></i></a>
+                                    @endif
+                                @endauth
+                                @guest
+                                    <a href="{{ route('articles_article_addfavorite',encrypt($article->id)) }}?url={{ encrypt(route(Route::currentRouteName(),['subject_id'=>encrypt($t->sid),'article_id'=>encrypt($t->id)])) }}"><i class="glyphicon glyphicon-star" style="color: #ffa200;"></i></a>
+                                @endguest
+                            </h3>
                             @if(isset($article))
                                 {!! htmlentities($article->content) !!}
                             @endif
@@ -94,11 +97,5 @@
         </div>
     </div>
 </div>
-
-        <script>
-            $(document).ready(function() {
-                $('#summernote').summernote();
-            });
-        </script>
 </body>
 </html>

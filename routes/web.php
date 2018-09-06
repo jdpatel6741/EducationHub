@@ -21,7 +21,7 @@ Route::get('download/{type}/{filename}', 'Controller@download');
 // conver video to mp3
 Route::get('converter', function() {
 	return view('converter');
-});
+})->name('converter');
 Route::post('convert', 'Controller@convert');
 
 
@@ -38,7 +38,7 @@ Route::group(['prefix'=>'mytube'],function()
 	
 	Route::group(['prefix'=>'admin','middleware'=>'auth'],function()
 	{
-		Route::get('dashboard', 'mytube\admin\mytubeAdminMaster@dashboard');
+		Route::get('dashboard', 'mytube\admin\mytubeAdminMaster@dashboard')->name('mytube_dashboard');
 		Route::get('postvideo', 'mytube\admin\mytubeAdminMaster@postvideo');
 		Route::post('postvideo/post', 'mytube\admin\mytubeAdminMaster@post');
 		Route::get('videomanager', 'mytube\admin\mytubeAdminMaster@videomanager');
@@ -92,8 +92,8 @@ Route::group(['prefix'=>'ebooks'],function()
 	Route::get('/thumbnail/{bid}',["uses" => 'ebooks\ebooksMaster@thumbnail',"as" => 'book_thumb']);
 
 	Route::group(['prefix'=>'admin','middleware'=>'auth'],function() {
-		Route::get('favorite', 'ebooks\admin\ebooksAdminMaster@favorite');
-		Route::get('postebook', 'ebooks\admin\ebooksAdminMaster@postebook');
+		Route::get('favorite', 'ebooks\admin\ebooksAdminMaster@favorite')->name('ebooks_favorite');
+		Route::get('postebook', ["uses"=>'ebooks\admin\ebooksAdminMaster@postebook',"as"=>'postebook']);
 		Route::get('subscription', ["uses"=>'ebooks\admin\ebooksAdminMaster@subscription',"as"=>'ebooks_subscription']);
 		Route::get('subscription/subscribe/{uid}/{url}', ["uses"=>'ebooks\admin\ebooksAdminMaster@subscribe',"as"=>'ebooks_author_subscribe']);
 		Route::get('subscription/unsubscribe/{id}', ["uses"=>'ebooks\admin\ebooksAdminMaster@unsubscribe',"as"=>'ebooks_author_unsubscribe']);
@@ -117,6 +117,13 @@ Route::group(['prefix'=>'articles'],function()
 	{
 		Route::get('add', ['uses'=>'articles\admin\articlesAdminMaster@add','as'=>'articles_add']);
 		Route::post('addArticle', ['uses'=>'articles\admin\articlesAdminMaster@addArticle','as'=>'articles_add_article']);
+		Route::get('manageArticle', ['uses'=>'articles\admin\articlesAdminMaster@manageArticle','as'=>'articles_manage']);
+		Route::get('articlesmanager/edit/{aid}', ["uses"=>'articles\admin\articlesAdminMaster@editarticle',"as"=>'article_edit']);
+		Route::get('articlesmanager/delete/{aid}','articles\admin\articlesAdminMaster@deletearticle')->name('articles_article_deletearticle');
+		Route::post('articlesmanager/updatearticle/{aid}','articles\admin\articlesAdminMaster@updatearticle')->name('articles_updatearticle');
+		Route::get('favorite', 'articles\admin\articlesAdminMaster@articles_favorite')->name('articles_favorite');
+		Route::get('favorite/add/{aid}', 'articles\admin\articlesAdminMaster@addfavorite')->name('articles_article_addfavorite');
+		Route::get('favorite/remove/{aid}', 'articles\admin\articlesAdminMaster@removefavorite')->name('articles_article_removefavorite');
 	});
 });
 

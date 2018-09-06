@@ -16,6 +16,7 @@ class DatabaseArtical extends Migration
         Schema::create('tbl_articals_topics', function (Blueprint $table) {
             $table->increments('id');
             $table->bigInteger('sid');
+            $table->integer('uid');
             $table->string('topic');
             $table->longText('content');
             $table->timestamps();
@@ -24,6 +25,22 @@ class DatabaseArtical extends Migration
         Schema::create('tbl_articals_subjects', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
+        });
+
+        Schema::create('tbl_articals_views', function (Blueprint $table) {
+            $table->increments('id');
+            $table->integer('article_id');
+            $table->integer('visits');
+            $table->string('ip');
+            $table->timestamp('date');
+        });
+
+        Schema::create('tbl_articals_favorite', function (Blueprint $table)
+        {
+            $table->increments('id');
+            $table->integer('user_id');
+            $table->integer('article_id');
+            $table->integer('status');
         });
     }
 
@@ -36,5 +53,7 @@ class DatabaseArtical extends Migration
     {
         Schema::dropIfExists('tbl_articals_topics');
         Schema::dropIfExists('tbl_articals_subjects');
+        Schema::dropIfExists('tbl_articals_views');
+        Schema::dropIfExists('tbl_articals_favorite');
     }
 }

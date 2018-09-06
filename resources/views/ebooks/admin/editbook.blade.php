@@ -1,57 +1,14 @@
-@php
-    //init variables
-    $url = URL::to('/')."/ebooks";
-    $furl = URL::to('/');
-@endphp
-        <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-    <meta charset="utf-8">
-    <title>MyTube</title>
-    <meta name="generator" content="Bootply" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <link rel="stylesheet" href="{{ asset('css/styles.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/bootstrap.min.css') }}">
     <style>
         body{background-color:#f1f1f1;}
         .grey
         {color:#767676;font-size:12px;}
         .nopad{padding-left:2px;padding-right:2px;}
-        @media screen and (max-width: 699px) and (min-width: 300px){ul.mytube{display:none;}}
+        @media screen and (max-width: 699px) and (min-width: 300px){#navbar-collapse1{display:none;}}
         .form-control, .btn{border-radius: 0px;}
     </style>
-    <script src="{{ asset('js/jquery-3.2.1.min.js') }}"></script>
-    <script src="{{ asset('js/bootstrap.min.js') }}"></script>
-    <script src="{{ asset('js/mytube/scripts.js') }}"></script>
-    <script type="text/javascript">
-        $("document").ready(function(){
-            $("#selectfile").click(function () {
-                $("#fileToUpload").click();
-            });
-            $("#fileToUpload").change(function (e) {
-                $("#vname").show();
-                $("#vidname").html(e.target.files[0].name);
-            });
-            $("#submit").click(function(e){
-                $(this).prop('disabled','true');
-                var formData = new FormData($("#videodata")[0]);
-                $.ajax({
-                    url: '{{ route('ebooks_books_updatebook',encrypt($book->id)) }}',
-                    type: 'POST',
-                    data: formData,
-                    async: false,
-                    cache: false,
-                    contentType: false,
-                    processData: false,
-                    success: function (returndata) {
-                        $("#msg").html(returndata).show().fadeOut(8000);
-                    }
-                });
-                $(this).removeAttr('disabled');
-            });
-        });
-    </script>
 </head>
 <body>
 @include('ebooks.navbar')
@@ -116,5 +73,33 @@
     </div>
     <div class="clearfix"></div>
 </div>
+    <script type="text/javascript">
+        $("document").ready(function(){
+            $("#selectfile").click(function () {
+                $("#fileToUpload").click();
+            });
+            $("#fileToUpload").change(function (e) {
+                $("#vname").show();
+                $("#vidname").html(e.target.files[0].name);
+            });
+            $("#submit").click(function(e){
+                $(this).prop('disabled','true');
+                var formData = new FormData($("#videodata")[0]);
+                $.ajax({
+                    url: '{{ route('ebooks_books_updatebook',encrypt($book->id)) }}',
+                    type: 'POST',
+                    data: formData,
+                    async: false,
+                    cache: false,
+                    contentType: false,
+                    processData: false,
+                    success: function (returndata) {
+                        $("#msg").html(returndata).show().fadeOut(8000);
+                    }
+                });
+                $(this).removeAttr('disabled');
+            });
+        });
+    </script>
 </body>
 </html>
